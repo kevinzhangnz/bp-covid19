@@ -1,0 +1,18 @@
+app-widget {
+  display: block;
+
+  &.NewConfirmed,
+  &.TotalConfirmed {
+    background: yellow;
+  }
+
+  &.NewDeaths,
+  &.TotalDeaths {
+    background: red;
+  }
+
+  &.NewRecovered,
+  &.TotalRecovered {
+    background: greenyellow;
+  }
+}

@@ -1,3 +1,8 @@
-<p>
-  covid works!
-</p>
+
+<div class="m-4">
+  <div class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-4" *ngFor="let item of global | keyvalue">
+      <app-widget [data]="item" [ngClass]="item.key"></app-widget>
+    </div>
+  </div>
+</div>
