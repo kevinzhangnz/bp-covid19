@@ -28,8 +28,8 @@ export class CovidComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.countriesSubscription.unsubscribe();
-    this.statusSubscription.unsubscribe();
     this.summarySubscription.unsubscribe();
+    this.statusSubscription ? this.statusSubscription.unsubscribe() : this.statusSubscription = null;
   }
 
   /* GET Countries */
