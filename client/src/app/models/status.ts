@@ -10,5 +10,5 @@ export class Status {
     Deaths: number;
     Recovered: number;
     Active: number;
-    Date: string;
+    Date: Date;
 }

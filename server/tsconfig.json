@@ -11,7 +11,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@interfaces/*": ["src/interfaces/*"],
+      "@models/*": ["src/models/*"],
     },
     "incremental": true
   }

@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios'
 import { Request } from 'express';
 import { Observable } from 'rxjs';
 
-import { Country, Status, Summary } from '@interfaces/index';
+import { Country, Status, Summary } from 'src/models/index';
 import { AppService } from './app.service';
 
 @Controller()
@@ -17,14 +17,12 @@ export class AppController {
   }
 
   @Get('countries')
-  getCountries(@Req() request: Request): Observable<AxiosResponse<Country[]>> {
-    const url = request.url;
-    return this.appService.getCountries(url);
+  getCountries(): Observable<AxiosResponse<Country[]>> {
+    return this.appService.getCountries();
   }
 
   @Get('summary')
-  getSummary(@Req() request: Request): Observable<AxiosResponse<Summary>> {
-    const url = request.url;
-    return this.appService.getSummary(url);
+  getSummary(): Observable<AxiosResponse<Summary>> {
+    return this.appService.getSummary();
   }
 }

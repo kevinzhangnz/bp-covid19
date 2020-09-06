@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Country, Status, Summary } from '@interfaces/index';
+import { Country, Status, Summary } from 'src/models/index';
 
 @Injectable()
 export class AppService {
@@ -16,12 +16,14 @@ export class AppService {
       .pipe(map(response => response.data));
   }
 
-  getCountries(url: string): Observable<AxiosResponse<Country[]>> {
+  getCountries(): Observable<AxiosResponse<Country[]>> {
+    const url = '/countries';
     return this.httpService.get(this.publicApiUrl + url)
       .pipe(map(response => response.data));
   }
 
-  getSummary(url: string): Observable<AxiosResponse<Summary>> {
+  getSummary(): Observable<AxiosResponse<Summary>> {
+    const url = '/summary';
     return this.httpService.get(this.publicApiUrl + url)
       .pipe(map(response => response.data));
   }

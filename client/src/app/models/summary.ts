@@ -8,4 +8,5 @@ export class Summary {
         TotalRecovered: number;
     };
     Countries: [];
+    Date: Date;
 }
