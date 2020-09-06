@@ -1,20 +1,17 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoaderComponent } from './loader.component';
 
-describe('LoaderComponent', () => {
+describe('Component: Loader', () => {
   let component: LoaderComponent;
   let fixture: ComponentFixture<LoaderComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ LoaderComponent ]
     })
     .compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoaderComponent);
