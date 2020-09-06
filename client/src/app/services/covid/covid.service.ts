@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { timeout } from 'rxjs/operators';
@@ -31,8 +31,8 @@ export class CovidService {
   }
 
   /** GET By Country All Status */
-  getCountryStatus(country: string, params: HttpParams): Observable<Status> {
-    return this.http.get<Status>(this.countryAPIURL + `/${country}`, {params}).pipe(
+  getCountryStatus(country: string, params: any): Observable<Status[]> {
+    return this.http.get<Status[]>(this.countryAPIURL + `/${country}`, {params}).pipe(
       timeout(this.timeout)
     );
   }

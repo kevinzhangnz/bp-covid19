@@ -1,7 +1,33 @@
-.card {
-  background: transparent;
+:host {
+  display: block;
 
-  &-text {
-    font-size: 2rem;
+  &.Active {
+    background: orange;
+  }
+
+  &.Confirmed,
+  &.NewConfirmed,
+  &.TotalConfirmed {
+    background: yellow;
+  }
+
+  &.Deaths,
+  &.NewDeaths,
+  &.TotalDeaths {
+    background: red;
+  }
+
+  &.Recovered,
+  &.NewRecovered,
+  &.TotalRecovered {
+    background: greenyellow;
+  }
+
+  .card {
+    background: transparent;
+
+    &-text {
+      font-size: 2rem;
+    }
   }
 }

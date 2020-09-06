@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { WidgetComponent } from '@components/index';
 import { CovidComponent } from './covid.component';
@@ -15,7 +17,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    FormsModule,
+    RouterModule.forChild(routes),
+    NgSelectModule,
   ],
   declarations: [
     CovidComponent,

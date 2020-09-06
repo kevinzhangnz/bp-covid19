@@ -1,5 +1,16 @@
+<div class="m-4 text-center">
+  <ng-select class="mb-3" [items]="countries" autofocus
+    bindLabel="Country" (change)="onChange($event)"></ng-select>
 
-<div class="m-4">
+  <h1>{{selectedCountry}}</h1>
+  <h4 *ngIf="!dataAvailable">No Data Available!</h4>
+  <div *ngIf="dataAvailable" class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-4" *ngFor="let item of status | keyvalue">
+      <app-widget [data]="item" [ngClass]="item.key"></app-widget>
+    </div>
+  </div>
+
+  <h1>Global</h1>
   <div class="row row-cols-1 row-cols-md-3">
     <div class="col mb-4" *ngFor="let item of global | keyvalue">
       <app-widget [data]="item" [ngClass]="item.key"></app-widget>
