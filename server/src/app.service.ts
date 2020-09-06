@@ -11,8 +11,13 @@ export class AppService {
   
   constructor(private httpService: HttpService) {}
   
-  getCountryStatus(url: string): Observable<AxiosResponse<Status>> {
-    return this.httpService.get(this.publicApiUrl + url)
+  getCountryStatus(country: string): Observable<AxiosResponse<Status>> {
+    const url = '/country/china';
+    const params = {
+      from: '2020-09-02T01:00:00Z',
+      to: '2020-09-03T00:00:00Z'
+    };
+    return this.httpService.get(this.publicApiUrl + url, {params})
       .pipe(map(response => response.data));
   }
 

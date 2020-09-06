@@ -9,6 +9,7 @@ import { LoaderService } from '@services/index';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { LayoutComponent } from './components/layout/layout.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    GraphQLModule,
   ],
   providers: [
     Configuration,

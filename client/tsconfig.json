@@ -1,15 +1,26 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@components/*": ["app/components/*"],
-      "@config/*": ["config/*"],
-      "@interceptors/*": ["app/interceptors/*"],
-      "@models/*": ["app/models/*"],
-      "@modules/*": ["app/modules/*"],
-      "@services/*": ["app/services/*"],
+      "@components/*": [
+        "app/components/*"
+      ],
+      "@config/*": [
+        "config/*"
+      ],
+      "@interceptors/*": [
+        "app/interceptors/*"
+      ],
+      "@models/*": [
+        "app/models/*"
+      ],
+      "@modules/*": [
+        "app/modules/*"
+      ],
+      "@services/*": [
+        "app/services/*"
+      ]
     },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -22,7 +33,9 @@
     "module": "es2020",
     "lib": [
       "es2018",
-      "dom"
-    ]
+      "dom",
+      "esnext.asynciterable"
+    ],
+    "allowSyntheticDefaultImports": true
   }
 }

@@ -1,14 +1,6 @@
 export class Status {
-    Country: string;
-    CountryCode: string;
-    Province: string;
-    City: string;
-    CityCode: string;
-    Lat: string;
-    Lon: string;
+    Active: number;
     Confirmed: number;
     Deaths: number;
     Recovered: number;
-    Active: number;
-    Date: Date;
 }

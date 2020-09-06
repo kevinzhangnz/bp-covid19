@@ -8,7 +8,7 @@ export class CountryResolver {
     constructor(private service: AppService) { }
 
     @Query(returns => [Country])
-    countries() {
+    async countries() {
         return this.service.getCountries();
     }
 }

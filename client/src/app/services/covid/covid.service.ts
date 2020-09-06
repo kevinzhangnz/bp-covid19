@@ -31,8 +31,8 @@ export class CovidService {
   }
 
   /** GET By Country All Status */
-  getCountryStatus(country: string, params: any): Observable<Status[]> {
-    return this.http.get<Status[]>(this.countryAPIURL + `/${country}`, {params}).pipe(
+  getCountryStatus(country: string): Observable<Status[]> {
+    return this.http.get<Status[]>(this.countryAPIURL + `/${country}`).pipe(
       timeout(this.timeout)
     );
   }

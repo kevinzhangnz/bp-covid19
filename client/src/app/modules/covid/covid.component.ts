@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
 import { Subscription } from 'rxjs';
 
 import { Country, Status } from '@models/index';
@@ -15,11 +17,12 @@ export class CovidComponent implements OnDestroy, OnInit {
   status: Status;
   selectedCountry: string;
   dataAvailable = true;
-  countriesSubscription: Subscription;
-  statusSubscription: Subscription;
-  summarySubscription: Subscription;
+  private countriesSubscription: Subscription;
+  private statusSubscription: Subscription;
+  private summarySubscription: Subscription;
 
-  constructor(private service: CovidService) { }
+  constructor(private apollo: Apollo,
+              private service: CovidService) { }
 
   ngOnInit(): void {
     this.getCountries();
@@ -28,38 +31,81 @@ export class CovidComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.countriesSubscription.unsubscribe();
-    this.summarySubscription.unsubscribe();
     this.statusSubscription ? this.statusSubscription.unsubscribe() : this.statusSubscription = null;
+    this.summarySubscription.unsubscribe();
   }
 
   /* GET Countries */
   getCountries(): void {
-    this.countriesSubscription = this.service.getCountries()
-      .subscribe(data => {
-        this.countries = data.sort((a, b) => a.Country.localeCompare(b.Country));
+    this.countriesSubscription = this.apollo
+      .watchQuery({
+        query: gql`
+          {
+            countries {
+              Country,
+              Slug,
+            }
+          }
+        `,
+      })
+      .valueChanges.subscribe((result: any) => {
+        this.countries = result.data && result.data.countries;
       });
   }
 
   /* GET Summary */
   getSummary(): void {
-    this.summarySubscription = this.service.getSummary()
-      .subscribe(data => this.global = data.Global);
+    this.summarySubscription = this.apollo
+      .watchQuery({
+        query: gql`
+          {
+            summary {
+              Global {
+                NewConfirmed,
+                TotalConfirmed,
+                NewDeaths,
+                TotalDeaths,
+                NewRecovered,
+                TotalRecovered
+              }
+            }
+          }
+        `,
+      })
+      .valueChanges.subscribe((result: any) => {
+        this.global = result.data && result.data.summary.Global;
+      });
   }
 
   /** GET By Country All Status
    *  @param country: country Slug string
    */
   getCountryStatus(country: string): void {
-    const params = {
-      from: '2020-09-02T01:00:00Z',
-      to: '2020-09-03T00:00:00Z'
-    };
+    this.statusSubscription = this.apollo
+      .watchQuery({
+        query: gql`
+          {
+            status(country: ${country}) {
+              Active,
+              Confirmed,
+              Deaths,
+              Recovered
+            }
+          }
+        `,
+      })
+      .valueChanges.subscribe((result: any) => {
+        // this.status = result.data && result.data.status;
 
-    this.statusSubscription = this.service.getCountryStatus(country, params)
-      .subscribe(data => {
-        this.dataAvailable = data.length > 0;
-        this.status = data[0] || null;
+        this.dataAvailable = result.data.status.length > 0;
+        this.status = result.data.status[0] || null;
       });
+
+    // this.statusSubscription = this.service.getCountryStatus(country)
+    //   .subscribe(data => {
+    //     this.dataAvailable = data.length > 0;
+    //     this.status = data[0] || null;
+    //   });
   }
 
   /** onChange to trigger getCountryStatus

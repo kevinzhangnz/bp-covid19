@@ -7,6 +7,4 @@ export class Summary {
         NewRecovered: number;
         TotalRecovered: number;
     };
-    Countries: [];
-    Date: Date;
 }

@@ -8,7 +8,7 @@ export class SummaryResolver {
     constructor(private service: AppService) { }
 
     @Query(returns => Summary)
-    summary() {
+    async summary() {
         return this.service.getSummary();
     }
 }
