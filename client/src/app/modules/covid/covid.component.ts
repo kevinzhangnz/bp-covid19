@@ -4,7 +4,6 @@ import gql from 'graphql-tag';
 import { Subscription } from 'rxjs';
 
 import { Country, Status } from '@models/index';
-import { CovidService } from '@services/index';
 
 @Component({
   selector: 'app-covid',
@@ -13,16 +12,15 @@ import { CovidService } from '@services/index';
 })
 export class CovidComponent implements OnDestroy, OnInit {
   countries: Country[];
+  countriesSummary: Status[];
   global: any;
   status: Status;
   selectedCountry: string;
   dataAvailable = true;
   private countriesSubscription: Subscription;
-  private statusSubscription: Subscription;
   private summarySubscription: Subscription;
 
-  constructor(private apollo: Apollo,
-              private service: CovidService) { }
+  constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
     this.getCountries();
@@ -31,7 +29,6 @@ export class CovidComponent implements OnDestroy, OnInit {
 
   ngOnDestroy(): void {
     this.countriesSubscription.unsubscribe();
-    this.statusSubscription ? this.statusSubscription.unsubscribe() : this.statusSubscription = null;
     this.summarySubscription.unsubscribe();
   }
 
@@ -78,34 +75,40 @@ export class CovidComponent implements OnDestroy, OnInit {
   }
 
   /** GET By Country All Status
-   *  @param country: country Slug string
+   *  @param country: country Slug string used to filter the list
    */
   getCountryStatus(country: string): void {
-    this.statusSubscription = this.apollo
+    this.summarySubscription = this.apollo
       .watchQuery({
         query: gql`
           {
-            status(country: ${country}) {
-              Active,
-              Confirmed,
-              Deaths,
-              Recovered
+            summary {
+              Countries {
+                Slug,
+                NewConfirmed,
+                TotalConfirmed,
+                NewDeaths,
+                TotalDeaths,
+                NewRecovered,
+                TotalRecovered
+              }
             }
           }
         `,
       })
       .valueChanges.subscribe((result: any) => {
-        // this.status = result.data && result.data.status;
+        this.countriesSummary = result.data && result.data.summary.Countries;
 
-        this.dataAvailable = result.data.status.length > 0;
-        this.status = result.data.status[0] || null;
+        const summaryList = this.countriesSummary.filter(item => item.Slug === country);
+        this.dataAvailable = summaryList.length > 0;
+
+        const summary = summaryList[0] || null;
+
+        if (summary) {
+          const { Slug, ...status } = summary;
+          this.status = status;
+        }
       });
-
-    // this.statusSubscription = this.service.getCountryStatus(country)
-    //   .subscribe(data => {
-    //     this.dataAvailable = data.length > 0;
-    //     this.status = data[0] || null;
-    //   });
   }
 
   /** onChange to trigger getCountryStatus

@@ -15,23 +15,7 @@ scalar DateTime
 
 type Query {
   countries: [Country!]!
-  status(country: String!): Status!
   summary: Summary!
-}
-
-type Status {
-  Active: Int!
-  City: String!
-  CityCode: String!
-  Confirmed: Int!
-  Country: String!
-  CountryCode: String!
-  Date: DateTime!
-  Deaths: Int!
-  Lat: String!
-  Lon: String!
-  Province: String!
-  Recovered: Int!
 }
 
 type Summary {

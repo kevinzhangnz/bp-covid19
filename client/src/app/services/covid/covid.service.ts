@@ -4,21 +4,19 @@ import { Observable } from 'rxjs';
 import { timeout } from 'rxjs/operators';
 
 import { Configuration } from '@config/index';
-import { Country, Status, Summary } from '@models/index';
+import { Country, Summary } from '@models/index';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CovidService {
   readonly countriesAPIURL: string;
-  readonly countryAPIURL: string;
   readonly summaryAPIURL: string;
   readonly timeout: number;
 
   constructor(private config: Configuration,
               private http: HttpClient) {
     this.countriesAPIURL = this.config.HOST + this.config.COUNTRIES_PATH;
-    this.countryAPIURL = this.config.HOST + this.config.COUNTRY_PATH;
     this.summaryAPIURL = this.config.HOST + this.config.SUMMARY_PATH;
     this.timeout = this.config.TIMEOUT;
   }
@@ -26,13 +24,6 @@ export class CovidService {
   /** GET Countries */
   getCountries(): Observable<Country[]> {
     return this.http.get<Country[]>(this.countriesAPIURL).pipe(
-      timeout(this.timeout)
-    );
-  }
-
-  /** GET By Country All Status */
-  getCountryStatus(country: string): Observable<Status[]> {
-    return this.http.get<Status[]>(this.countryAPIURL + `/${country}`).pipe(
       timeout(this.timeout)
     );
   }

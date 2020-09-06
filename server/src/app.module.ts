@@ -6,7 +6,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CountryResolver } from './country/country.resolver';
 import { SummaryResolver } from './summary/summary.resolver';
-import { StatusResolver } from './status/status.resolver';
 
 @Module({
   imports: [
@@ -19,6 +18,6 @@ import { StatusResolver } from './status/status.resolver';
     HttpModule
   ],
   controllers: [AppController],
-  providers: [AppService, CountryResolver, SummaryResolver, StatusResolver],
+  providers: [AppService, CountryResolver, SummaryResolver],
 })
 export class AppModule {}

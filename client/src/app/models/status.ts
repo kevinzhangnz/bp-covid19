@@ -1,6 +1,9 @@
 export class Status {
-    Active: number;
-    Confirmed: number;
-    Deaths: number;
-    Recovered: number;
+    Slug?: string;
+    NewConfirmed: number;
+    TotalConfirmed: number;
+    NewDeaths: number;
+    TotalDeaths: number;
+    NewRecovered: number;
+    TotalRecovered: number;
 }
