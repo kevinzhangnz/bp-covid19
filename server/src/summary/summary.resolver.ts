@@ -1,6 +1,6 @@
 import { Query, Resolver } from '@nestjs/graphql';
 
-import { Summary } from '@models/index';
+import { Summary } from '../models/index';
 import { AppService } from '../app.service';
 
 @Resolver(of => Summary)

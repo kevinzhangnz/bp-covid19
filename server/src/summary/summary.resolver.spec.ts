@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { SummaryResolver } from './summary.resolver';
 
-describe('SummaryResolver', () => {
+describe('Resolver: Summary', () => {
   let resolver: SummaryResolver;
 
   beforeEach(async () => {

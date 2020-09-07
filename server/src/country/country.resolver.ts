@@ -1,6 +1,6 @@
 import { Query, Resolver } from '@nestjs/graphql';
 
-import { Country } from '@models/index';
+import { Country } from '../models/index';
 import { AppService } from '../app.service';
 
 @Resolver(of => Country)

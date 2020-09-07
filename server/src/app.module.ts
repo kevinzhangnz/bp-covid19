@@ -9,13 +9,13 @@ import { SummaryResolver } from './summary/summary.resolver';
 
 @Module({
   imports: [
+    HttpModule,
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       debug: true,
       playground: true,
       sortSchema: true,
     }),
-    HttpModule
   ],
   controllers: [AppController],
   providers: [AppService, CountryResolver, SummaryResolver],

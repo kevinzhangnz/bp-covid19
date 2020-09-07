@@ -1,5 +1,5 @@
 import { HttpService, Injectable } from '@nestjs/common';
-import { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
