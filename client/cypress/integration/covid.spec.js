@@ -17,7 +17,7 @@ context('Covid', () => {
   })
 
   it('should load country summary when selecting', () => {
-    cy.get('[data-cy=search]').should('be.visible').click().get('.ng-option:last').click()
+    cy.get('[data-cy=search]').should('be.visible').click().contains('.ng-option-label', 'New Zealand').click()
     cy.get('[data-cy=country_title]').should('be.visible')
     cy.get('[data-cy=country]').first().should('be.visible')
   })
