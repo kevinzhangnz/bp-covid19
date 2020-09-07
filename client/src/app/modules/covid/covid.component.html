@@ -1,18 +1,18 @@
 <div class="m-4 text-center">
-  <ng-select class="mb-3" [items]="countries" autofocus
+  <ng-select class="mb-3" [items]="countries" autofocus data-cy="search"
     bindLabel="Country" (change)="onChange($event)"></ng-select>
 
-  <h1>{{selectedCountry}}</h1>
-  <h4 *ngIf="!dataAvailable">No Data Available!</h4>
+  <h1 data-cy="country_title">{{selectedCountry}}</h1>
+  <h4 *ngIf="!dataAvailable" data-cy="nodata">No Data Available!</h4>
   <div *ngIf="dataAvailable" class="row row-cols-1 row-cols-md-3">
-    <div class="col mb-4" *ngFor="let item of status | keyvalue">
+    <div class="col mb-4" *ngFor="let item of status | keyvalue" data-cy="country">
       <app-widget [data]="item" [ngClass]="item.key"></app-widget>
     </div>
   </div>
 
-  <h1>Global</h1>
+  <h1 data-cy="global_title">Global</h1>
   <div class="row row-cols-1 row-cols-md-3">
-    <div class="col mb-4" *ngFor="let item of global | keyvalue">
+    <div class="col mb-4" *ngFor="let item of global | keyvalue" data-cy="global">
       <app-widget [data]="item" [ngClass]="item.key"></app-widget>
     </div>
   </div>
